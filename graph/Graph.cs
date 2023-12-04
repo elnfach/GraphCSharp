@@ -45,7 +45,7 @@ namespace GraphC_.graph
             m_nodes = new List<GraphNode>();
         }
 
-        public Graph(int range, int chance, bool complete_graph = true)
+        public Graph(int range, int chance, bool complete_graph)
         {
             m_range = range;
             m_chance = chance;
@@ -125,9 +125,8 @@ namespace GraphC_.graph
                 j_edge = 0;
                 foreach (var j in m_nodes)
                 {
-                    if (!i.HasEdge( j ) && 
-                        i.GetID() != j.GetID() &&
-                        random.Next( 0, m_range ) > m_chance)
+                    if (m_complete_graph &&
+                        i.GetID() != j.GetID())
                     {
                         i.CreateEdge( i, j );
                         j.CreateEdge( j, i );
@@ -135,12 +134,35 @@ namespace GraphC_.graph
                     }
                     else
                     {
-                        m_edges[i_edge, j_edge] = null;
+                        if (!i.HasEdge( j ) &&
+                            i.GetID() != j.GetID() &&
+                            random.Next( 0, m_range ) > m_chance)
+                        {
+                            i.CreateEdge( i, j );
+                            j.CreateEdge( j, i );
+                            m_edges[i_edge, j_edge] = new Edge( i, j );
+                        }
+                        else
+                        {
+                            m_edges[i_edge, j_edge] = null;
+                        }
                     }
+                    
                     j_edge++;
                 }
                 i_edge++;
             }
+        }
+
+        public string[] GetNodes() {
+            string[] temp = new string[m_nodes.Count];
+            int i = 0;
+            foreach (var item in m_nodes)
+            {
+                temp[i] = item.GetName();
+                i++;
+            }
+            return temp;
         }
 
         public void ShowEdges(bool enabled)

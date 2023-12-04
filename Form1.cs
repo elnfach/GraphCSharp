@@ -14,20 +14,11 @@ namespace GraphC_
 {
     public partial class Form1 : Form
     {
-        Graph graph = new Graph();
+        Graph graph;
         Random random = new Random();
+
         public Form1()
         {
-            int x, y;
-            int count = 5;
-            for (int i = 0; i < count; i++)
-            {
-                x = random.Next(20, 700);
-                y = random.Next(20, 700);
-                graph.AddNode( new GraphNode( x, y, 12, "Город " + i ) );
-            }
-            graph.CreateEdges();
-            graph.ViewTable();
             InitializeComponent();
         }
 
@@ -37,20 +28,74 @@ namespace GraphC_
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
-            e.Graphics.Clear(Color.White);
-            graph.Draw(this, e);
+            if (graph != null) {
+                e.Graphics.Clear( Color.White );
+                graph.Draw( this, e );
+            }
         }
 
         private void checkBox2_CheckedChanged_1(object sender, EventArgs e)
         {
-            graph.ShowNames( checkBox2.Checked );
-            Refresh();
+            if (graph != null)
+            {
+                graph.ShowNames( checkBox2.Checked );
+                Refresh();
+            }
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-            graph.ShowEdges( checkBox1.Checked );
-            Refresh();
+            if (graph != null)
+            {
+                graph.ShowEdges( checkBox1.Checked );
+                Refresh();
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (comboBox1.SelectedIndex >= 0)
+            {
+                if (comboBox2.SelectedIndex >= 0)
+                {
+                    Console.WriteLine( comboBox1.SelectedIndex.ToString() );
+                }
+            }
+        }
+
+        private void checkBox3_CheckedChanged(object sender, EventArgs e)
+        {
+            textBox1.Enabled = !checkBox3.Checked;
+            textBox2.Enabled = !checkBox3.Checked;
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (graph == null)
+                    graph = null;
+                if (!checkBox3.Checked)
+                    graph = new Graph( Convert.ToInt32( textBox1.Text ), Convert.ToInt32( textBox2.Text ), checkBox3.Checked );
+                else
+                    graph = new Graph();
+                int x, y;
+                int count = Convert.ToInt32( textBox3.Text );
+                for (int i = 0; i < count; i++)
+                {
+                    x = random.Next( 20, 700 );
+                    y = random.Next( 20, 700 );
+                    graph.AddNode( new GraphNode( x, y, 12, "Город " + i ) );
+                }
+                graph.CreateEdges();
+                graph.ViewTable();
+                comboBox1.Items.AddRange( graph.GetNodes() );
+                comboBox2.Items.AddRange( graph.GetNodes() );
+                Refresh();
+            } catch
+            {
+                MessageBox.Show( "Введите верные данные!" );
+            }
         }
     }
 }

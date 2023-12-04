@@ -55,6 +55,7 @@ namespace GraphC_.graph
             m_radius = radius;
             m_diameter = radius * 2;
             m_edges = new List<Edge>();
+            m_name = name;
         }
 
         ~GraphNode() { }
@@ -62,6 +63,7 @@ namespace GraphC_.graph
         public int GetX() { return m_x; }
         public int GetY() { return m_y; }
         public int GetID() { return m_id; }
+        public string GetName() { return m_name;}
 
         private void CalcaluateBound()
         {
