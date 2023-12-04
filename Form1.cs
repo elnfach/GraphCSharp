@@ -16,10 +16,12 @@ namespace GraphC_
     {
         Graph graph;
         Random random = new Random();
+        string[] algorithms = { "Полный перебор", "Эвристическое", "Жадный" };
 
         public Form1()
         {
             InitializeComponent();
+            comboBox3.Items.AddRange( algorithms );
         }
 
         private void Form1_Load(object sender, EventArgs e)

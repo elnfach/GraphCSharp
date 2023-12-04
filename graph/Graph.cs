@@ -141,10 +141,7 @@ namespace GraphC_.graph
                             i.CreateEdge( i, j );
                             j.CreateEdge( j, i );
                             m_edges[i_edge, j_edge] = new Edge( i, j );
-                        }
-                        else
-                        {
-                            m_edges[i_edge, j_edge] = null;
+                            m_edges[j_edge, i_edge] = new Edge( j, i );
                         }
                     }
                     
