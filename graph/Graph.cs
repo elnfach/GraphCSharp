@@ -143,24 +143,14 @@ namespace GraphC_.graph
             }
         }
 
-        public void HideEdges()
+        public void ShowEdges(bool enabled)
         {
-            m_show_weight = false;
+            m_show_weight = enabled;
         }
 
-        public void ShowEdges()
+        public void ShowNames(bool enabled)
         {
-            m_show_weight = true;
-        }
-
-        public void HideNames()
-        {
-            m_show_names = false;
-        }
-
-        public void ShowNames()
-        {
-            m_show_names = true;
+            m_show_names = enabled;
         }
     }
 }

@@ -22,8 +22,8 @@ namespace GraphC_
             int count = 5;
             for (int i = 0; i < count; i++)
             {
-                x = random.Next(0, 700);
-                y = random.Next(0, 700);
+                x = random.Next(20, 700);
+                y = random.Next(20, 700);
                 graph.AddNode( new GraphNode( x, y, 12, "Город " + i ) );
             }
             graph.CreateEdges();
@@ -43,27 +43,13 @@ namespace GraphC_
 
         private void checkBox2_CheckedChanged_1(object sender, EventArgs e)
         {
-            if (checkBox2.Checked)
-            {
-                graph.ShowNames();
-            }
-            else
-            {
-                graph.HideNames();
-            }
+            graph.ShowNames( checkBox2.Checked );
             Refresh();
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-            if (checkBox1.Checked)
-            {
-                graph.ShowEdges();
-            }
-            else
-            {
-                graph.HideEdges();
-            }
+            graph.ShowEdges( checkBox1.Checked );
             Refresh();
         }
     }
