@@ -12,6 +12,8 @@ namespace GraphC_.graph
 {
     internal class GraphNode
     {
+        static int id;
+        int m_id;
         int m_x;
         int m_y;
         int m_radius;
@@ -26,6 +28,7 @@ namespace GraphC_.graph
 
         public GraphNode()
         {
+            m_id = id++;
             m_x = 0;
             m_y = 0;
             m_radius = 5;
@@ -35,7 +38,8 @@ namespace GraphC_.graph
             m_edges = new List<Edge>();
         }
         public GraphNode(int x, int y, string name)
-        { 
+        {
+            m_id = id++;
             m_x = x;
             m_y = y;
             m_radius = 5;
@@ -47,6 +51,7 @@ namespace GraphC_.graph
 
         public GraphNode(int x, int y, int radius, string name) : this(x, y, name)
         {
+            m_id = id++;
             m_radius = radius;
             m_diameter = radius * 2;
             m_edges = new List<Edge>();
@@ -56,30 +61,7 @@ namespace GraphC_.graph
 
         public int GetX() { return m_x; }
         public int GetY() { return m_y; }
-
-        public string[,] GetWeight()
-        {
-            string[,] temp = new string[m_edges.Count, m_edges.Count];
-            int i = 0;
-            int j = 0;
-            foreach (var edge in m_edges)
-            {
-                foreach (var edge_2 in m_edges)
-                {
-                    if (edge.GetWeight() == int.MaxValue)
-                    {
-                        temp[i, j] = "MAX";
-                    }
-                    else
-                    {
-                        temp[i, j] = edge.GetWeight().ToString();
-                    }
-                    j++;
-                }
-                i++;
-            }
-            return temp;
-        }
+        public int GetID() { return m_id; }
 
         private void CalcaluateBound()
         {

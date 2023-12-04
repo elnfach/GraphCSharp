@@ -75,17 +75,6 @@ namespace GraphC_.graph
 
         public void ViewTable()
         {
-            array = new float[m_nodes.Count, m_nodes.Count];
-
-            for (int i = 0; i < m_nodes.Count; i++)
-            {
-                for (int j = 0; j < m_nodes.Count; j++)
-                {
-                    array[i, j] = (int)Math.Sqrt(Math.Pow(m_nodes[i].GetX() - m_nodes[j].GetX(), 2) +
-                                  Math.Pow(m_nodes[i].GetY() - m_nodes[j].GetY(), 2));
-                }
-            }
-
             foreach (GraphNode item in m_nodes)
             {
                 Console.WriteLine("{0}\t{1}", item.GetX(), item.GetY());
@@ -137,6 +126,7 @@ namespace GraphC_.graph
                 foreach (var j in m_nodes)
                 {
                     if (!i.HasEdge( j ) && 
+                        i.GetID() != j.GetID() &&
                         random.Next( 0, m_range ) > m_chance)
                     {
                         i.CreateEdge( i, j );
