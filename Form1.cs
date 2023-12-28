@@ -16,7 +16,7 @@ namespace GraphC_
     {
         Graph graph;
         Random random = new Random();
-        string[] algorithms = { "Полный перебор", "Эвристическое", "Жадный" };
+        string[] algorithms = { "Полный перебор", "Эвристический", "Жадный" };
 
         public Form1()
         {
@@ -56,13 +56,13 @@ namespace GraphC_
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (comboBox1.SelectedIndex >= 0)
-            {
-                if (comboBox2.SelectedIndex >= 0)
-                {
-                    Console.WriteLine( comboBox1.SelectedIndex.ToString() );
-                }
-            }
+            graph.Update();
+            if (comboBox3.SelectedIndex == 0)
+                graph.BruteForce( 0, 1, 0 );
+            if (comboBox3.SelectedIndex == 1)
+                graph.HeuristicAlgorithm();
+            if (comboBox3.SelectedIndex == 2)
+                graph.Greedy(0);
         }
 
         private void checkBox3_CheckedChanged(object sender, EventArgs e)
@@ -71,7 +71,8 @@ namespace GraphC_
             textBox2.Enabled = !checkBox3.Checked;
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        // Initialization graph
+        private void button3_Click(object sender, EventArgs e) 
         {
             try
             {
@@ -90,9 +91,6 @@ namespace GraphC_
                     graph.AddNode( new GraphNode( x, y, 12, "Город " + i ) );
                 }
                 graph.CreateEdges();
-                graph.ViewTable();
-                comboBox1.Items.AddRange( graph.GetNodes() );
-                comboBox2.Items.AddRange( graph.GetNodes() );
                 Refresh();
             } catch
             {

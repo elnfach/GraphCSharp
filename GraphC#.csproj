@@ -60,6 +60,7 @@
     <Compile Include="graph\GraphNode.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="unitlity\Stack.cs" />
     <Compile Include="unitlity\Vector2f.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>

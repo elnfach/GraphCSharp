@@ -19,6 +19,9 @@ namespace GraphC_.graph
         int m_radius;
         int m_diameter;
 
+        bool m_is_marked = false;
+        public int weight = 0;
+
         Vector2f[,] m_bound;
         int m_factor;
 
@@ -64,10 +67,14 @@ namespace GraphC_.graph
         public int GetY() { return m_y; }
         public int GetID() { return m_id; }
         public string GetName() { return m_name;}
-
-        private void CalcaluateBound()
+        public List<Edge> GetEdges() { return m_edges; }
+        public void SetMark(bool mark)
         {
-             
+            m_is_marked = mark;
+        }
+        public bool GetMark()
+        {
+            return m_is_marked;
         }
 
         public void Draw(Form1 form, PaintEventArgs e, bool enabled)
