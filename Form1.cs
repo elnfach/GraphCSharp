@@ -16,7 +16,7 @@ namespace GraphC_
     {
         Graph graph;
         Random random = new Random();
-        string[] algorithms = { "Полный перебор", "Эвристический", "Жадный" };
+        string[] algorithms = { "Полный перебор", "Деревянный", "Жадный" };
 
         public Form1()
         {
